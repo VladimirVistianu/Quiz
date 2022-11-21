@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\StefaniniQuiz.Core\StefaniniQuiz.Core.csproj" />
+    <ProjectReference Include="..\StefaniniQuiz.Infrastructure\StefaniniQuiz.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

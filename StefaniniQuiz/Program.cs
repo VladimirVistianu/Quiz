@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using StefaniniQuiz.Infrastructure.Data;
+using StefaniniQuiz.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 var configuration = builder.Configuration.GetConnectionString("QuizDbContextConnection");
 builder.Services.AddDbContext<QuizDbContext>(options => options.UseSqlServer(configuration));
+
+builder.Services.AddScoped();
 
 var app = builder.Build();
 

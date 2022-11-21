@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StefaniniQuiz.Infrastructure\StefaniniQuiz.Infrastructure.csproj" />
+    <ProjectReference Include="..\StefaniniQuiz.Services\StefaniniQuiz.Services.csproj" />
   </ItemGroup>
 
 </Project>
