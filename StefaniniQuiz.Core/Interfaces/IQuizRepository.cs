@@ -2,10 +2,8 @@
 
 namespace StefaniniQuiz.Core.Interfaces
 {
-    public interface IQuizRepository
+    public interface IQuizRepository : IGenericRepository<Quiz>
     {
-        Task CreateQuiz(Quiz quiz);
-        Task<Quiz> GetQuiz(Guid id);
-        Task<ICollection<Quiz>> GetQuizzes();
+        // Toate repozitoriile trebuie sa mosteneasca de la  Repository Generica <T>
     }
 }

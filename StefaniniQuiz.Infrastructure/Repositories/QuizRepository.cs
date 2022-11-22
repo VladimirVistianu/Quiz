@@ -5,25 +5,17 @@ using StefaniniQuiz.Infrastructure.Data;
 
 namespace StefaniniQuiz.Infrastructure.Repositories
 {
-    public class QuizRepository : IQuizRepository
+    public class QuizRepository : GenericRepository<Quiz>, IQuizRepository
     {
+
         private readonly QuizDbContext _context;
 
-
-        public QuizRepository(QuizDbContext context)
+        public QuizRepository(QuizDbContext context) : base(context)
         {
             _context = context; 
         }
 
-        public async Task CreateQuiz(Quiz quiz)
-        {
-            
-            await _context.Quizzes.AddAsync(quiz);
-            await _context.SaveChangesAsync();
-
-        }
-
-        public async Task<Quiz> GetQuiz(Guid id)
+        public override async Task<Quiz> GetByIdAsync(Guid id)
         {
             return await _context.Quizzes
                 .Include(q=>q.Questions)
@@ -31,7 +23,7 @@ namespace StefaniniQuiz.Infrastructure.Repositories
                 .FirstOrDefaultAsync(q => q.Id == id);
         }
 
-        public async Task<ICollection<Quiz>> GetQuizzes()
+        public override async Task<ICollection<Quiz>> GetAllAsync()
         {
             return await _context.Quizzes
                 .Include(q => q.Questions)

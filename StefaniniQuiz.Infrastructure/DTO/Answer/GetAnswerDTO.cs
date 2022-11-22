@@ -1,4 +1,4 @@
-﻿namespace StefaniniQuiz.Infrastructure.DTO.GetDTO
+﻿namespace StefaniniQuiz.Infrastructure.DTO.Answer
 {
     public class GetAnswerDTO
     {

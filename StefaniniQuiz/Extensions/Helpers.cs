@@ -1,7 +1,7 @@
 ﻿using StefaniniQuiz.Core.Interfaces;
 using StefaniniQuiz.Infrastructure.Repositories;
-using StefaniniQuiz.Services.Services.Interfaces;
 using StefaniniQuiz.Services.Services;
+using StefaniniQuiz.Services.Services.Quizzes;
 
 namespace StefaniniQuiz.API.Extensions
 {
@@ -11,10 +11,7 @@ namespace StefaniniQuiz.API.Extensions
         {
             services.AddScoped<IQuizRepository, QuizRepository>();
             services.AddScoped<IQuizServices, QuizServices>();
-            services.AddScoped<IQuestionRepository, QuestionRepository>();
-            services.AddScoped<IQuestionServices, QuestionServices>();
-            services.AddScoped<IAnswerRepository, AnswerRepository>();
-            services.AddScoped<IAnswerServices, AnswerServices>();
+            
             
         }
     }

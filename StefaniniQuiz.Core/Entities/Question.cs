@@ -15,7 +15,7 @@ namespace StefaniniQuiz.Core.Entities
         public ICollection<Answer> Answers { get; set; }
         public Guid QuizID { get; set; }
 
-        public Quiz Quiz { get; set; }
+        public Quiz Quiz { get; set; } 
         
     }
 }

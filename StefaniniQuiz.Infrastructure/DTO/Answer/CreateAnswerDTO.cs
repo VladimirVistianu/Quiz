@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StefaniniQuiz.Infrastructure.DTO
+namespace StefaniniQuiz.Infrastructure.DTO.Answer
 {
     public class CreateAnswerDTO
     {

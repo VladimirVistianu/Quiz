@@ -1,4 +1,6 @@
-﻿namespace StefaniniQuiz.Infrastructure.DTO.GetDTO
+﻿using StefaniniQuiz.Infrastructure.DTO.Question;
+
+namespace StefaniniQuiz.Infrastructure.DTO.Quiz
 {
     public class GetQuizDTO
     {
