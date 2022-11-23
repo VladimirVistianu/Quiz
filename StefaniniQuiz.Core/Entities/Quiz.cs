@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using StefaniniQuiz.Core.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace StefaniniQuiz.Core.Entities
 {
-    public class Quiz
+    public class Quiz : IEntity
     {
 
         [Key]

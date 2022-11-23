@@ -11,7 +11,7 @@ namespace StefaniniQuiz.Infrastructure.DTO.Quiz
 
         public string TechnologyName { get; set; }
 
-        public IEnumerable<GetQuestionDTO> Questions { get; set; }
+        public IEnumerable<GetQuestionDTO> Questions { get; set; } = Enumerable.Empty<GetQuestionDTO>();
 
         public DateTime DateAdded { get; set; }
 

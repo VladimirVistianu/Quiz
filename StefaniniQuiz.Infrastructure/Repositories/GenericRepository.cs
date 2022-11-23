@@ -1,16 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using StefaniniQuiz.Core.Entities;
 using StefaniniQuiz.Core.Interfaces;
 using StefaniniQuiz.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace StefaniniQuiz.Infrastructure.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
         protected readonly QuizDbContext _quizDbContext;
         protected DbSet<T> _dbSet;
@@ -81,14 +85,36 @@ namespace StefaniniQuiz.Infrastructure.Repositories
             }
         }
 
-        public virtual async Task<ICollection<T>> GetAllAsync()
+        public async Task<ICollection<T>> GetAllAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
-            return await _dbSet.ToListAsync();
+
+             IQueryable<T> query = _dbSet;
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            return await query.ToListAsync();
         }
 
-        public virtual async Task<T> GetByIdAsync(Guid id)
+       
+
+        public async Task<T?> GetByIdAsync(Guid id,Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null )
         {
-            return await _dbSet.FindAsync(id);
+            IQueryable<T> query = _dbSet;
+            
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            return await query.FirstOrDefaultAsync(t => t.Id == id);
+
+
         }
+
+
     }
 }

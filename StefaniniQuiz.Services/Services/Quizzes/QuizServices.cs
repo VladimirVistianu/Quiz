@@ -1,4 +1,5 @@
-﻿using StefaniniQuiz.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using StefaniniQuiz.Core.Entities;
 using StefaniniQuiz.Core.Interfaces;
 using StefaniniQuiz.Infrastructure.DTO.Quiz;
 
@@ -45,14 +46,19 @@ namespace StefaniniQuiz.Services.Services.Quizzes
 
         public async Task<Quiz> GetQuiz(Guid id)
         {
-            var quiz = await _quizRepository.GetByIdAsync(id);
-            return quiz;
+
+            var quiz = await  _quizRepository.GetByIdAsync(id, include: source => source.Include(q => q.Questions).ThenInclude(q => q.Answers)); 
+            
+            return  quiz;
         }
 
         public async Task<ICollection<Quiz>> GetQuizzes()
         {
-            return await _quizRepository.GetAllAsync();
+            var quiz =  await _quizRepository.GetAllAsync(include: source => source.Include(q => q.Questions).ThenInclude(a => a.Answers));
+            return quiz;
         }
+
+
 
 
     }
