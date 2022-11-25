@@ -9,10 +9,10 @@ namespace StefaniniQuiz.API.Extensions
     {
         public static void AddScoped(this IServiceCollection services)
         {
-            services.AddScoped<IQuizRepository, QuizRepository>();
             services.AddScoped<IQuizServices, QuizServices>();
-            
-            
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+
         }
     }
 }

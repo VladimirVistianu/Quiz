@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace StefaniniQuiz.Infrastructure.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity, new()
     {
         protected readonly QuizDbContext _quizDbContext;
         protected DbSet<T> _dbSet;
@@ -70,19 +70,14 @@ namespace StefaniniQuiz.Infrastructure.Repositories
             }
         }
 
-
-        public async Task<bool> EditAsync(T entity)
+  
+        public async Task<bool> Update(T entity)
         {
-            try
-            {
+           
                 _quizDbContext.Update(entity);
                 await _quizDbContext.SaveChangesAsync();
-                return true;
-            }
-            catch(Exception ex)
-            {
-                return false;
-            }
+               return true;
+            
         }
 
         public async Task<ICollection<T>> GetAllAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
@@ -115,6 +110,75 @@ namespace StefaniniQuiz.Infrastructure.Repositories
 
         }
 
+        public  async Task<T> RemoveExistingQuestion(T existingQuestion)
+        {
+            _dbSet.Remove(existingQuestion);
+            return existingQuestion;
+           
+        }
+
+        public async Task<T> SetValues(T existingEntity, T editedEntity)
+        {
+            _quizDbContext.Entry(existingEntity).CurrentValues.SetValues(editedEntity);
+            return existingEntity;
+        }
+
+        //protected void SynchronizeCollection(
+        //    List<T> sources,
+        //    List<T> destinations,
+        //    Action<T, T> cloneItem,
+        //    Action<T> onDelete = null)
+        //{
+        //    //sources = sources.EmptyIfNull();
+
+        //    var sourceIds = sources.Select(source => source.Id).ToList();
+
+        //    // delete
+        //    var deletedItems = destinations
+        //        .Where(destination => !sourceIds.Contains(destination.Id))
+        //        .ToList();
+
+        //    foreach (var toDelete in deletedItems)
+        //    {
+        //        onDelete?.Invoke(toDelete);
+
+        //        destinations.Remove(toDelete);
+
+        //        if (//!IsReadOnly && 
+        //             toDelete.Id != Guid.Empty)
+        //            _dbSet.Remove(toDelete);
+        //    }
+
+        //    // update
+        //    var editedSourceItems = sources
+        //        .Where(source => destinations
+        //            .SingleOrDefault(destination => destination.Id == source.Id) != null);
+        //    foreach (var toEdit in editedSourceItems)
+        //    {
+        //        var destination = destinations.Single(d => d.Id == toEdit.Id);
+
+        //        cloneItem(toEdit, destination);
+
+        //        if (//!IsReadOnly  && 
+        //            destination.Id != Guid.Empty)
+        //            _dbSet.Update(destination);
+        //    }
+
+        //    // insert
+        //    var newSourceItems = sources
+        //        .Where(source => destinations
+        //            .SingleOrDefault(destination => destination.Id == source.Id && source.Id != Guid.Empty) == null);
+
+        //    foreach (var toInsert in newSourceItems)
+        //    {
+        //        var destination = new T();
+
+        //        cloneItem(toInsert, destination);
+
+        //        destinations.Add(destination);
+
+        //    }
 
     }
 }
+

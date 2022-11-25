@@ -121,5 +121,37 @@ namespace StefaniniQuiz.API.Controllers
 
             return CreatedAtAction(nameof(GetQuiz), new { id = createdQuiz.Id }, getQuizDTO);
         }
+
+        [HttpPut]
+        public async Task<ActionResult> EditQuiz(EditQuizDTO editQuizDTO)
+        {
+            var editQuiz = new Quiz
+            {
+                Id = editQuizDTO.Id,
+                Title = editQuizDTO.Title,
+                TechnologyName = editQuizDTO.TechnologyName,
+                DateAdded = editQuizDTO.DateAdded,
+                Questions = editQuizDTO.Questions.Select(x => new Question
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    QuizID = editQuizDTO.Id,
+                    Answers = x.Answers.Select(y => new Answer
+                    {
+                        Id = y.Id,
+                        QuestionId = x.Id,
+                        AnswerText = y.AnswerText,
+                        IsCorrect = y.IsCorrect,
+                        Point = y.Point
+                    }).ToList()
+                }).ToList()
+            };
+
+
+            await _quizServices.EditQuiz(editQuiz);
+
+            return Ok();
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using StefaniniQuiz.Core.Entities;
+using StefaniniQuiz.Infrastructure.DTO.Answer;
 using StefaniniQuiz.Infrastructure.DTO.Quiz;
 
 namespace StefaniniQuiz.Services.Services.Quizzes
@@ -9,5 +10,6 @@ namespace StefaniniQuiz.Services.Services.Quizzes
         Task<Quiz> GetQuiz(Guid id);
         //Task<Quiz> UpdateQuiz(CreateQuizDTO quiz);
         Task<ICollection<Quiz>> GetQuizzes();
+        Task EditQuiz(Quiz editQuizDTO);
     }
 }

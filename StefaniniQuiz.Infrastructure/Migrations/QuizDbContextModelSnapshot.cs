@@ -46,7 +46,7 @@ namespace StefaniniQuiz.Infrastructure.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Answers");
+                    b.ToTable("Answers", (string)null);
                 });
 
             modelBuilder.Entity("StefaniniQuiz.Core.Entities.Candidate", b =>
@@ -72,7 +72,7 @@ namespace StefaniniQuiz.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Candidates");
+                    b.ToTable("Candidates", (string)null);
                 });
 
             modelBuilder.Entity("StefaniniQuiz.Core.Entities.Question", b =>
@@ -93,7 +93,7 @@ namespace StefaniniQuiz.Infrastructure.Migrations
 
                     b.HasIndex("QuizID");
 
-                    b.ToTable("Question");
+                    b.ToTable("Question", (string)null);
                 });
 
             modelBuilder.Entity("StefaniniQuiz.Core.Entities.Quiz", b =>
@@ -117,7 +117,7 @@ namespace StefaniniQuiz.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Quizzes");
+                    b.ToTable("Quizzes", (string)null);
                 });
 
             modelBuilder.Entity("StefaniniQuiz.Core.Entities.Result", b =>
@@ -145,7 +145,7 @@ namespace StefaniniQuiz.Infrastructure.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Results");
+                    b.ToTable("Results", (string)null);
                 });
 
             modelBuilder.Entity("StefaniniQuiz.Core.Entities.Answer", b =>
